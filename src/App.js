@@ -21,7 +21,7 @@ function App() {
       window.grecaptcha.ready(() => {
         if (recaptchaRef.current) {
           window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: 'YOUR_SITE_KEY_HERE', // Replace with your actual site key
+            sitekey: '6LcQ_48rAAAAAHd69eyns1XflmbFcmofUjyA8rV4', // Replace with your actual site key
             callback: (token) => {
               console.log('reCAPTCHA verified:', token);
             },
@@ -232,7 +232,7 @@ function App() {
                     <textarea
                       value={useCase}
                       onChange={(e) => setUseCase(e.target.value)}
-                      placeholder="e.g., Cancel my gym membership, call to check if a store has something in stock, book a doctor's appointment..."
+                      placeholder="e.g., Call to check if a store has something in stock, cancel a gym membership, book a doctor's appointment..."
                       className="w-full p-4 h-24 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none resize-none bg-white/90 placeholder-gray-400 transition-colors"
                       required
                     />
