@@ -13,6 +13,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const recaptchaRef = useRef(null);
 
+
   // Load reCAPTCHA script
   useEffect(() => {
     const script = document.createElement('script');
