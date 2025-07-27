@@ -24,7 +24,7 @@ function App() {
       window.grecaptcha.ready(() => {
         if (recaptchaRef.current) {
           window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: '6LcQ_48rAAAAAHd69eyns1XflmbFcmofUjyA8rV4', // Replace with your actual site key
+            sitekey: '6LdxqJArAAAAAECumizxSse2E8fvFW_dFbzWSElH', // Replace with your actual site key
             callback: (token) => {
               console.log('reCAPTCHA verified:', token);
             },
