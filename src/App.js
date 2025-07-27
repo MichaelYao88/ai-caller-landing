@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { PhoneCall, Bot, CalendarCheck, Users, Clock, CheckCircle, Star, Play, X, ArrowRight, Sparkles, Shield } from "lucide-react";
-import { db } from "../firebase"; // adjust path if needed
+import { db } from "firebase"; // adjust path if needed
 import { collection, addDoc } from "firebase/firestore";
 
 function App() {
