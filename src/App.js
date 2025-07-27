@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { PhoneCall, Bot, CalendarCheck, Users, Clock, CheckCircle, Star, Play, X, ArrowRight, Sparkles, Shield } from "lucide-react";
+import { db } from "../firebase"; // adjust path if needed
+import { collection, addDoc } from "firebase/firestore";
+import { useState } from "react";
 
 function App() {
   const [useCase, setUseCase] = useState("");
@@ -55,19 +58,17 @@ function App() {
       alert("Please fill in all fields.");
       return;
     }
-
-    // Get reCAPTCHA token
+  
     const recaptchaToken = window.grecaptcha ? window.grecaptcha.getResponse() : null;
-    
+  
     if (!recaptchaToken) {
       alert("Please complete the reCAPTCHA verification.");
       return;
     }
-
+  
     setIsLoading(true);
-
+  
     try {
-      // Verify reCAPTCHA token with your backend
       const response = await fetch('/api/verify-recaptcha', {
         method: 'POST',
         headers: {
@@ -79,15 +80,27 @@ function App() {
           email
         })
       });
-
+  
       const result = await response.json();
-
+  
       if (result.success) {
+        // ✅ SAVE TO FIRESTORE
+        try {
+          await addDoc(collection(db, "signups"), {
+            email,
+            useCase,
+            createdAt: new Date()
+          });
+        } catch (firebaseError) {
+          console.error("Error saving to Firestore:", firebaseError);
+          alert("Something went wrong saving your info. Please try again.");
+        }
+  
+        // ✅ Continue with UI update
         setSubmitted(true);
         setUseCase("");
         setEmail("");
         setWaitlistCount(prev => prev + 1);
-        // Reset reCAPTCHA
         window.grecaptcha.reset();
       } else {
         alert("Verification failed. Please try again.");
@@ -101,6 +114,7 @@ function App() {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen text-gray-900 font-sans overflow-hidden">
