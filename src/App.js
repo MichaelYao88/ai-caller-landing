@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { PhoneCall, Bot, CalendarCheck, Users, Clock, CheckCircle, Star, Play, X, ArrowRight, Sparkles, Shield } from "lucide-react";
 import { db } from "../firebase"; // adjust path if needed
 import { collection, addDoc } from "firebase/firestore";
-import { useState } from "react";
 
 function App() {
   const [useCase, setUseCase] = useState("");
