@@ -1,0 +1,8 @@
+{
+    "functions": {
+      "api/verify-recaptcha.js": {
+        "runtime": "nodejs18.x"
+      }
+    }
+  }
+  
