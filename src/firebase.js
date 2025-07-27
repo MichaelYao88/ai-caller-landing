@@ -1,17 +1,17 @@
+// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// ⚠️ Replace with your own Firebase project config
+// Your Firebase config
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyA2DaNwp0H7fhRantPaSlU6APbzEftSv-8",
+  authDomain: "appointmentcaller-3b3d2.firebaseapp.com",
+  projectId: "appointmentcaller-3b3d2",
+  storageBucket: "appointmentcaller-3b3d2.firebasestorage.app",
+  messagingSenderId: "248148065520",
+  appId: "1:248148065520:web:6ba5df760edba6ca609635"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-export { db };
+export const db = getFirestore(app);
