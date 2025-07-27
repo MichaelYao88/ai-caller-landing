@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -12,18 +14,18 @@ module.exports = async (req, res) => {
 
   try {
     const secret = process.env.RECAPTCHA_SECRET_KEY;
+
     const response = await fetch(
       `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`,
-      {
-        method: "POST",
-      }
+      { method: "POST" }
     );
 
     const data = await response.json();
     return res.status(200).json({ success: data.success });
   } catch (error) {
-    console.error("Error verifying reCAPTCHA:", error);
+    console.error("reCAPTCHA error:", error);
     return res.status(500).json({ success: false });
   }
 };
+
 
