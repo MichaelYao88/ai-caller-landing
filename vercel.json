@@ -1,12 +1,9 @@
 {
+  "version": 2,
   "functions": {
     "api/verify-recaptcha.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
+      "memory": 128,
+      "maxDuration": 10
     }
   }
 }
