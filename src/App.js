@@ -11,6 +11,8 @@ function App() {
   const [waitlistCount, setWaitlistCount] = useState(1247);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log("Using Firestore DB:", db);
+
   // Simulate real-time waitlist counter
   useEffect(() => {
     const interval = setInterval(() => {
