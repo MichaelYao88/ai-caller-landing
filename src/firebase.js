@@ -15,7 +15,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-console.log("FIREBASE CONFIG:", firebaseConfig);
+console.log("apikey:", apiKey);
 console.log("FIREBASE CONFIG:", firebaseConfig);
 
 
