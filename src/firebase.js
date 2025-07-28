@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+console.log("FIREBASE.JS LOADED");
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   // Add your Firebase config here
