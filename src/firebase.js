@@ -2,8 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-console.log("FIREBASE.JS LOADED");
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   // Add your Firebase config here
@@ -15,8 +13,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-console.log("apikey:", process.env.REACT_APP_FIREBASE_API_KEY);
-console.log("FIREBASE CONFIG:", firebaseConfig);
 
 
 // Initialize Firebase
