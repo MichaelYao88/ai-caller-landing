@@ -10,40 +10,6 @@ function App() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState(1247);
   const [isLoading, setIsLoading] = useState(false);
-  const recaptchaRef = useRef(null);
-
-
-  // Load reCAPTCHA script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      // Initialize reCAPTCHA when script loads
-      window.grecaptcha.ready(() => {
-        if (recaptchaRef.current) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: '6LdxqJArAAAAAECumizxSse2E8fvFW_dFbzWSElH', // Replace with your actual site key
-            callback: (token) => {
-              console.log('reCAPTCHA verified:', token);
-            },
-            'expired-callback': () => {
-              console.log('reCAPTCHA expired');
-            }
-          });
-        }
-      });
-    };
-    document.head.appendChild(script);
-
-    return () => {
-      // Cleanup
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
 
   // Simulate real-time waitlist counter
   useEffect(() => {
@@ -59,31 +25,10 @@ function App() {
       return;
     }
   
-    const recaptchaToken = window.grecaptcha ? window.grecaptcha.getResponse() : null;
-  
-    if (!recaptchaToken) {
-      alert("Please complete the reCAPTCHA verification.");
-      return;
-    }
-  
     setIsLoading(true);
   
     try {
-      const response = await fetch('/api/verify-recaptcha', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          token: recaptchaToken,
-          useCase,
-          email
-        })
-      });
   
-      const result = await response.json();
-  
-      if (result.success) {
         // ✅ SAVE TO FIRESTORE
         try {
           await addDoc(collection(db, "signups"), {
@@ -101,15 +46,10 @@ function App() {
         setUseCase("");
         setEmail("");
         setWaitlistCount(prev => prev + 1);
-        window.grecaptcha.reset();
-      } else {
-        alert("Verification failed. Please try again.");
-        window.grecaptcha.reset();
-      }
+
     } catch (error) {
       console.error("Error submitting:", error);
       alert("Something went wrong. Please try again.");
-      window.grecaptcha.reset();
     } finally {
       setIsLoading(false);
     }
@@ -266,11 +206,6 @@ function App() {
                     />
                   </div>
 
-                  {/* reCAPTCHA */}
-                  <div className="flex justify-center py-2">
-                    <div ref={recaptchaRef}></div>
-                  </div>
-                  
                   <button
                     onClick={handleJoinWaitlist}
                     disabled={submitted || isLoading}
