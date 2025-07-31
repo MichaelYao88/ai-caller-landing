@@ -4,14 +4,13 @@ import { db } from "./firebase"; // adjust path if needed
 import { collection, addDoc } from "firebase/firestore";
 
 function App() {
+  document.title = "AppointmentCaller";
   const [useCase, setUseCase] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState(1247);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("Using Firestore DB:", db);
 
   // Simulate real-time waitlist counter
   useEffect(() => {
